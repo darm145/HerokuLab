@@ -36,7 +36,7 @@ and finally it creates the app and give us the links:
 https://glacial-gorge-41471.herokuapp.com/ | https://git.heroku.com/glacial-gorge-41471.git  
 now we are going to generate the git, so for this we apply the next commands:  
 ![](imagenes/gitcommands.PNG)  
-
+then we can apply the git commands as usual.
 # java-getting-started
 
 A barebones Java app, which can easily be deployed to Heroku.
