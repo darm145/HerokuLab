@@ -41,8 +41,17 @@ then we can apply the git commands as usual.
 with the app running we apply the command heroku ps:scale web=1 
 ![](imagenes/herokuscale.PNG)  
 and we open it  
-![](imagenes/herokuopen.PNG)
- 
+![](imagenes/herokuopen.PNG)  
+# View logs
+now we test the logs:
+![](imagenes/herokulogs.PNG)  
+# Use a database
+now we will create a database
+![](imagenes/herokuaddons.PNG)  
+then we will check its credentials:
+![](imagenes/herokucredentials.PNG)  
+and heroku pg offers a more detailed data about the database:
+![](imagenes/herokupg.PNG)  
 # java-getting-started
 
 A barebones Java app, which can easily be deployed to Heroku.

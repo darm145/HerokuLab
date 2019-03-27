@@ -22,15 +22,34 @@ import java.util.UUID;
 @Component
 @Qualifier("UserPostgresRepository")
 public class UserPostgresRepository implements IUserRepository {
-
-    private String dbUrl = null;
+	@Value("${spring.datasource.url}")
+	private String dbUrl;
+	@Value("${spring.datasource.username}")
+	private String dbUsername;
+	@Value("${spring.datasource.password}")
+	private String dbPassword;
 
     @Autowired
     private DataSource dataSource;
 
     @Override
     public User getUserByUserName(String userName) {
-        return null;
+        String query="SELECT * FROM users WHERE name='"+userName+"');";
+        User u=new User();
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+                
+             u.setName(rs.getString("name"));
+             u.setId(UUID.fromString(rs.getString("id")));
+             return u;
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+            
     }
 
     @Override
@@ -56,7 +75,19 @@ public class UserPostgresRepository implements IUserRepository {
 
     @Override
     public User find(UUID id) {
-        return null;
+    	String query="SELECT * FROM users WHERE id='"+id.toString()+"');";
+        User u=new User();
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+             u.setName(rs.getString("name"));
+             u.setId(UUID.fromString(rs.getString("id")));
+             return u;
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -86,6 +117,8 @@ public class UserPostgresRepository implements IUserRepository {
         } else {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl(dbUrl);
+            config.setUsername(dbUsername);
+            config.setPassword(dbPassword);
             return new HikariDataSource(config);
         }
     }
