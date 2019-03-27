@@ -1,6 +1,7 @@
 package edu.eci.controllers;
 
 import edu.eci.models.User;
+import edu.eci.services.UserServices;
 import edu.eci.services.contracts.IUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,12 +42,23 @@ public class UserController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateUser(@RequestBody User user){
-        throw new NotImplementedException();
+    	try{
+    		userServices.update(user);
+            return new ResponseEntity<>( HttpStatus.OK); 
+        }catch(Exception e){
+            return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> deleteUser(@RequestBody UUID id){
-        throw new NotImplementedException();
+    	try{
+    		userServices.remove(id);
+    		
+            return new ResponseEntity<>( HttpStatus.OK); 
+        }catch(Exception e){
+            return new ResponseEntity<>(e.getStackTrace(), HttpStatus.FORBIDDEN);
+        }
     }
 }

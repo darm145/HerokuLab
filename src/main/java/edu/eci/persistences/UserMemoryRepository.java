@@ -69,10 +69,13 @@ public class UserMemoryRepository implements IUserRepository{
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(UUID id) {
         UserMemoryRepository.usersContainer = UserMemoryRepository.getContainer()
                 .stream()
                 .filter(u -> !u.getId().equals(id))
                 .collect(toList());
     }
+
+	
+	
 }

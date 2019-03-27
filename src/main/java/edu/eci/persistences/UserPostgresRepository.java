@@ -75,7 +75,7 @@ public class UserPostgresRepository implements IUserRepository {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(UUID id) {
 
     }
 
@@ -89,4 +89,6 @@ public class UserPostgresRepository implements IUserRepository {
             return new HikariDataSource(config);
         }
     }
+
+	
 }

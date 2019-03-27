@@ -36,7 +36,13 @@ and finally it creates the app and give us the links:
 https://glacial-gorge-41471.herokuapp.com/ | https://git.heroku.com/glacial-gorge-41471.git  
 now we are going to generate the git, so for this we apply the next commands:  
 ![](imagenes/gitcommands.PNG)  
-then we can apply the git commands as usual.
+then we can apply the git commands as usual.  
+![](imagenes/gitpush.PNG)  
+with the app running we apply the command heroku ps:scale web=1 
+![](imagenes/herokuscale.PNG)  
+and we open it  
+![](imagenes/herokuopen.PNG)
+ 
 # java-getting-started
 
 A barebones Java app, which can easily be deployed to Heroku.
@@ -77,3 +83,4 @@ Use the following postman collection to test the REST API.
 For more information about using Java on Heroku, see these Dev Center articles:
 
 - [Java on Heroku](https://devcenter.heroku.com/categories/java)
+
