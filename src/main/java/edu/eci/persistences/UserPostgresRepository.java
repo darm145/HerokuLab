@@ -92,22 +92,56 @@ public class UserPostgresRepository implements IUserRepository {
 
     @Override
     public UUID save(User entity) {
-        return null;
+    	String query="UPDATE users SET name='"+entity.getName()+"' WHERE id='"+entity.getId().toString()+"';";
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery(query);
+             return entity.getId();
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void update(User entity) {
-
+    	String query="UPDATE users SET name='"+entity.getName()+"' WHERE id='"+entity.getId().toString()+"';";
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery(query);
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(User o) {
+    	String query="DELETE FROM users WHERE name='"+o.getName()+"' AND id='"+o.getId().toString()+"';";
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery(query);
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
     public void remove(UUID id) {
-
+    	String query="DELETE FROM users WHERE id='"+id.toString()+"';";
+        try(Connection connection = dataSource.getConnection()){
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery(query);
+        }
+        catch(Exception e) {
+        	System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     @Bean
