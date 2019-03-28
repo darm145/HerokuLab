@@ -1,0 +1,8 @@
+
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/users -d '{"name":"Prueba","id":"d81b3105-f605-490e-b9fe-a406c1efb8bb"}'
+curl -i -X PUT -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/users -d '{"name":"Prueba2","id":"d81b3105-f605-490e-b9fe-a406c1efb8bb"}'
+curl -i -X DELETE -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/users -d '{"id":"d81b3105-f605-490e-b9fe-a406c1efb8bb"}'
+
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/cars -d '{"id":"31116438-cae8-4501-a962-69496af4305d","licencePlate":"ABC123","brand":"Brand1"}'
+curl -i -X PUT -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/cars -d '{"id":"31116438-cae8-4501-a962-69496af4305d","licencePlate":"ABC123","brand":"Brand2"}'
+curl -i -X DELETE -HContent-Type:application/json -HAccept:application/json https://glacial-gorge-41471.herokuapp.com/cars -d '{"id":"31116438-cae8-4501-a962-69496af4305d"}'

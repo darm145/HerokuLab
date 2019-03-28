@@ -43,15 +43,36 @@ with the app running we apply the command heroku ps:scale web=1
 and we open it  
 ![](imagenes/herokuopen.PNG)  
 # View logs
-now we test the logs:
+now we test the logs:  
 ![](imagenes/herokulogs.PNG)  
 # Use a database
-now we will create a database
+now we will create a database  
 ![](imagenes/herokuaddons.PNG)  
-then we will check its credentials:
+then we will check its credentials:  
 ![](imagenes/herokucredentials.PNG)  
-and heroku pg offers a more detailed data about the database:
+and heroku pg offers a more detailed data about the database: 
 ![](imagenes/herokupg.PNG)  
+
+finally we will test all of the CRUD commands:
+## USER
+GET  
+![](imagenes/userget.PNG)  
+POST  
+![](imagenes/userpost.PNG)    
+PUT    
+![](imagenes/userupdate.PNG)    
+DELETE  
+![](imagenes/userdelete.PNG)  
+## CAR
+GET  
+![](imagenes/carget.PNG)  
+POST  
+![](imagenes/carpost.PNG)    
+PUT    
+![](imagenes/carupdate.PNG)    
+DELETE  
+![](imagenes/cardelete.PNG)  
+
 # java-getting-started
 
 A barebones Java app, which can easily be deployed to Heroku.
