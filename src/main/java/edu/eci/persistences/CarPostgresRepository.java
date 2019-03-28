@@ -78,10 +78,10 @@ public class CarPostgresRepository implements ICarRepository{
             throw new RuntimeException(e);
         }
     }
-/*
+
     @Override
     public UUID save(Car entity) {
-    	String query="UPDATE users SET name='"+entity.getName()+"' WHERE id='"+entity.getId().toString()+"';";
+    	String query="UPDATE Cars SET brand='"+entity.getBrand()+"',licencePlate='"+entity.getLicencePlate()+"' WHERE id='"+entity.getId().toString()+"';";
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
@@ -94,8 +94,8 @@ public class CarPostgresRepository implements ICarRepository{
     }
 
     @Override
-    public void update(User entity) {
-    	String query="UPDATE users SET name='"+entity.getName()+"' WHERE id='"+entity.getId().toString()+"';";
+    public void update(Car entity) {
+    	String query="UPDATE Cars SET brand='"+entity.getBrand()+"',licencePlate='"+entity.getLicencePlate()+"' WHERE id='"+entity.getId().toString()+"';";
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
@@ -107,8 +107,8 @@ public class CarPostgresRepository implements ICarRepository{
     }
 
     @Override
-    public void delete(User o) {
-    	String query="DELETE FROM users WHERE name='"+o.getName()+"' AND id='"+o.getId().toString()+"';";
+    public void delete(Car o) {
+    	String query="DELETE FROM cars WHERE id='"+o.getId().toString()+"';";
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
@@ -122,7 +122,7 @@ public class CarPostgresRepository implements ICarRepository{
 
     @Override
     public void remove(UUID id) {
-    	String query="DELETE FROM users WHERE id='"+id.toString()+"';";
+    	String query="DELETE FROM cars WHERE id='"+id.toString()+"';";
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
@@ -132,7 +132,7 @@ public class CarPostgresRepository implements ICarRepository{
             throw new RuntimeException(e);
         }
     }
-*/
+
     @Bean
     public DataSource dataSource() throws SQLException {
         if (dbUrl == null || dbUrl.isEmpty()) {
