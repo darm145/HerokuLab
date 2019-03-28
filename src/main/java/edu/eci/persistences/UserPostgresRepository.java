@@ -34,7 +34,7 @@ public class UserPostgresRepository implements IUserRepository {
 
     @Override
     public User getUserByUserName(String userName) {
-        String query="SELECT * FROM users WHERE name='"+userName+"');";
+        String query="SELECT * FROM users WHERE name='"+userName+"';";
         User u=new User();
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
@@ -93,7 +93,8 @@ public class UserPostgresRepository implements IUserRepository {
 
     @Override
     public UUID save(User entity) {
-    	String query="UPDATE users SET name='"+entity.getName()+"' WHERE id='"+entity.getId().toString()+"';";
+    	String query="INSERT INTO users (id,name) VALUES('"+entity.getId()+"','"+entity.getName()+"');" ;
+    	System.out.println(query);
         try(Connection connection = dataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
@@ -154,6 +155,7 @@ public class UserPostgresRepository implements IUserRepository {
             config.setJdbcUrl(dbUrl);
             config.setUsername(dbUsername);
             config.setPassword(dbPassword);
+            config.setMaximumPoolSize(2);
             return new HikariDataSource(config);
         }
     }

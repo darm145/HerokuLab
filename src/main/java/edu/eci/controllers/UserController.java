@@ -1,5 +1,6 @@
 package edu.eci.controllers;
 
+import edu.eci.models.UniqueId;
 import edu.eci.models.User;
 import edu.eci.services.UserServices;
 import edu.eci.services.contracts.IUserServices;
@@ -33,7 +34,8 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createUser(@RequestBody User user){
         try{
-            return new ResponseEntity<>(userServices.create(user), HttpStatus.CREATED);
+        	
+            return new ResponseEntity<>(userServices.save(user), HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
@@ -52,9 +54,9 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> deleteUser(@RequestBody UUID id){
+    public ResponseEntity<?> deleteUser(@RequestBody UniqueId temp){
     	try{
-    		userServices.remove(id);
+    		userServices.remove(temp.getId());
     		
             return new ResponseEntity<>( HttpStatus.OK); 
         }catch(Exception e){

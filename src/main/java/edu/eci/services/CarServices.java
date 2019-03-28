@@ -14,7 +14,7 @@ import edu.eci.services.contracts.ICarServices;
 public class CarServices implements ICarServices{
 	
 	@Autowired
-	@Qualifier("CarMemoryRepository")
+	@Qualifier("CarPostgresRepository")
 	private ICarRepository cr;
 	@Override
 	public List<Car> findAll() {
@@ -34,7 +34,7 @@ public class CarServices implements ICarServices{
 
 	@Override
 	public void update(Car entity) {
-		cr.save(entity);
+		cr.update(entity);
 		
 	}
 

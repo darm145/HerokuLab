@@ -20,8 +20,9 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import edu.eci.models.Car;
-import edu.eci.models.User;
+
 import edu.eci.persistences.repositories.ICarRepository;
+
 @Component
 @Qualifier("CarPostgresRepository")
 public class CarPostgresRepository implements ICarRepository{
@@ -33,7 +34,7 @@ public class CarPostgresRepository implements ICarRepository{
 	private String dbPassword;
 
     @Autowired
-    private DataSource dataSource;
+    private DataSource CardataSource;
 
     
 
@@ -42,7 +43,7 @@ public class CarPostgresRepository implements ICarRepository{
         String query = "SELECT * FROM cars";
         List<Car> cars=new ArrayList<>();
 
-        try(Connection connection = dataSource.getConnection()){
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()){
@@ -62,7 +63,7 @@ public class CarPostgresRepository implements ICarRepository{
     @Override
     public Car find(UUID id) {
     	String query="SELECT * FROM cars WHERE id='"+id.toString()+"');";
-        try(Connection connection = dataSource.getConnection()){
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
@@ -81,8 +82,8 @@ public class CarPostgresRepository implements ICarRepository{
 
     @Override
     public UUID save(Car entity) {
-    	String query="UPDATE Cars SET brand='"+entity.getBrand()+"',licencePlate='"+entity.getLicencePlate()+"' WHERE id='"+entity.getId().toString()+"';";
-        try(Connection connection = dataSource.getConnection()){
+    	String query="INSERT INTO  Cars (id,licenceplate,brand) VALUES ('"+entity.getId().toString()+"','"+entity.getLicencePlate()+"','"+entity.getBrand()+"');";
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
              return entity.getId();
@@ -96,7 +97,8 @@ public class CarPostgresRepository implements ICarRepository{
     @Override
     public void update(Car entity) {
     	String query="UPDATE Cars SET brand='"+entity.getBrand()+"',licencePlate='"+entity.getLicencePlate()+"' WHERE id='"+entity.getId().toString()+"';";
-        try(Connection connection = dataSource.getConnection()){
+    	System.out.println(query);
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
         }
@@ -109,7 +111,7 @@ public class CarPostgresRepository implements ICarRepository{
     @Override
     public void delete(Car o) {
     	String query="DELETE FROM cars WHERE id='"+o.getId().toString()+"';";
-        try(Connection connection = dataSource.getConnection()){
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
         }
@@ -123,7 +125,7 @@ public class CarPostgresRepository implements ICarRepository{
     @Override
     public void remove(UUID id) {
     	String query="DELETE FROM cars WHERE id='"+id.toString()+"';";
-        try(Connection connection = dataSource.getConnection()){
+        try(Connection connection = CardataSource.getConnection()){
             Statement stmt = connection.createStatement();
             stmt.executeQuery(query);
         }
@@ -134,7 +136,7 @@ public class CarPostgresRepository implements ICarRepository{
     }
 
     @Bean
-    public DataSource dataSource() throws SQLException {
+    public DataSource CardataSource() throws SQLException {
         if (dbUrl == null || dbUrl.isEmpty()) {
             return new HikariDataSource();
         } else {
@@ -142,6 +144,7 @@ public class CarPostgresRepository implements ICarRepository{
             config.setJdbcUrl(dbUrl);
             config.setUsername(dbUsername);
             config.setPassword(dbPassword);
+            config.setMaximumPoolSize(2);
             return new HikariDataSource(config);
         }
     }

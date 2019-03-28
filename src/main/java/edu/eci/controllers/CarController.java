@@ -1,6 +1,7 @@
 package edu.eci.controllers;
 
 import edu.eci.models.Car;
+import edu.eci.models.UniqueId;
 import edu.eci.services.contracts.ICarServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,12 @@ public class CarController {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> deleteCar(@RequestBody UUID id){
-        throw new NotImplementedException();
+    public ResponseEntity<?> deleteCar(@RequestBody UniqueId temp){
+    	try{
+    		carServices.remove(temp.getId());
+            return new ResponseEntity<>( HttpStatus.OK); 
+        }catch(Exception e){
+            return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
